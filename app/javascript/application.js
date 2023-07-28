@@ -9,7 +9,11 @@ document.addEventListener("turbo:before-render", (event) => {
   prevPath = window.location.pathname;
   event.detail.render = async (prevEl, newEl) => {
     await new Promise((resolve) => setTimeout(() => resolve(), 0));
-    morphdom(prevEl, newEl);
+    morphdom(prevEl, newEl, {
+      onBeforeElUpdated: function(fromEl, toEl) {
+        return !(fromEl.hasAttribute("data-turbo-morphdom-permanent") || fromEl.isEqualNode(toEl))
+      }
+    });
   };
 
   if (document.startViewTransition) {
@@ -37,6 +41,9 @@ document.addEventListener("turbo:before-frame-render", (event) => {
 
     morphdom(currentElement, newElement, {
       childrenOnly: true,
+      onBeforeElUpdated: function(fromEl, toEl) {
+        return !(fromEl.hasAttribute("data-turbo-morphdom-permanent") || fromEl.isEqualNode(toEl))
+      }
     });
   };
 
