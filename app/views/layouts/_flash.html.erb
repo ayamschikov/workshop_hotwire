@@ -4,12 +4,18 @@
     <% if flash[:notice] %>
       <div class="flash notice" role="alert" data-turbo-temporary data-controller="removeable" data-removeable-after-value="5">
         <p class="text-small"><%= flash[:notice] %></p>
+        <i data-action="click->removeable#remove">
+          <%= render "icons/close" %>
+        </i>
       </div>
     <% end %>
 
     <% if flash[:alert] %>
       <div class="flash alert" role="alert" data-turbo-temporary data-controller="removeable" data-removeable-after-value="5">
         <p class="text-small"><%= flash[:alert] %></p>
+        <i data-action="click->removeable#remove">
+          <%= render "icons/close" %>
+        </i>
       </div>
     <% end %>
   </div>
