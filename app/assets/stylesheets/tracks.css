@@ -44,3 +44,9 @@
 .track--duration {
   @apply text-gray-600 self-end w-10 ml-2 text-right;
 }
+
+.tracks--see-all-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
